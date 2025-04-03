@@ -33,10 +33,6 @@ public class Instructor {
         this.name = name;
     }
 
-    public List<Course> getCourses() {
-        return courses;
-    }
-
     public void setCourses(List<Course> courses) {
         this.courses = courses;
     }
@@ -53,11 +49,13 @@ public class Instructor {
         return Objects.hashCode(courses);
     }
 
-    void assignCourse(Course course){
-        course
-        System.out.println("Преподаватель " + name);
+    void assignCourse(Course course) {
+        courses.add(course);
+        System.out.println("Преподаватель " + name + "назначен на курс " + courses.getTitle());
+        if(instructor);
+            System.out.println("Преподаватель " + name +"уже ведёт курс " + courses.getTitle());
     }
-    List<Course> getCourses(){
-
+    public List<Course> getCourses() {
+        return courses;
     }
 }

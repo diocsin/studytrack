@@ -12,6 +12,7 @@ public class Course {
     private Set<Student> enrolledStudents = new HashSet<>();
     private Instructor instructor;
 
+
     public boolean hasSpace(){
         return false;
     }
