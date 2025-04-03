@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class Instructor {
-    private String id;
+    private final String id;
 
-    private String name;
+    private final String name;
 
     private List<Course> courses = new ArrayList<>();
 
@@ -21,24 +21,8 @@ public class Instructor {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
     }
 
     @Override
@@ -53,11 +37,16 @@ public class Instructor {
         return Objects.hashCode(courses);
     }
 
-    void assignCourse(Course course){
-        course
-        System.out.println("Преподаватель " + name);
+    void assignCourse(Course course) {
+        if (courses.contains(course)) {
+            System.out.println("Преподаватель " + name + "уже ведёт курс " + course.getTitle());
+        } else {
+            courses.add(course);
+            System.out.println("Преподаватель " + name + "назначен на курс " + course.getTitle());
+        }
     }
-    List<Course> getCourses(){
 
+    public List<Course> getCourses() {
+        return courses;
     }
 }
