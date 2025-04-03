@@ -1,4 +1,4 @@
-package ui.exception;
+package exception;
 
 public class DuplicateStudentException extends Exception{
 

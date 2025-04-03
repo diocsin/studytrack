@@ -1,4 +1,4 @@
-package ui.exception;
+package exception;
 
 public class ScheduleConflictException extends Exception{
 
