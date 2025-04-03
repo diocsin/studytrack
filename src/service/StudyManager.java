@@ -39,10 +39,14 @@ public class StudyManager {
         System.out.println("Преподаватель " + instructor.getName() + " назначен на курс " + course.getTitle());
     }
 
+    // toDo доделать
     public void enroll(Student student, Course course) {
+        try {
+            RegistrationService.registerStudentToCourse(student, course);
+        } catch ()
+
     }
 
-    // toDo доделать
     public void assignGrade(Student student, Course course, Grade grade) {
         student.assignGrade(course, grade);
         System.out.println("Оценка " + grade
