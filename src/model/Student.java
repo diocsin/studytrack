@@ -12,8 +12,6 @@ public class Student {
         this.id = id;
         this.name = name;
         this.age = age;
-        this.enrolledCourses = enrolledCourses;
-        this.grades = grades;
     }
 
     public List<Course> getEnrolledCourses() {
