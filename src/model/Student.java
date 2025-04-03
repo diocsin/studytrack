@@ -8,7 +8,7 @@ public class Student {
     private List<Course> enrolledCourses = new ArrayList<>();
     private Map<Course, Grade> grades = new HashMap<>();
 
-    public Student(String id, String name, int age, List<Course> enrolledCourses, Map<Course, Grade> grades) {
+    public Student(String id, String name, int age) {
         this.id = id;
         this.name = name;
         this.age = age;
