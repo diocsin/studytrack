@@ -51,10 +51,12 @@ public class Instructor {
 
     void assignCourse(Course course) {
         courses.add(course);
-        System.out.println("Преподаватель " + name + "назначен на курс " + courses.getTitle());
-        if(instructor);
-            System.out.println("Преподаватель " + name +"уже ведёт курс " + courses.getTitle());
+        System.out.println("Преподаватель " + name + "назначен на курс " + course.getTitle());
+        if (course.getInstructor().getName().contains(course.getTitle())) {
+            System.out.println("Преподаватель " + name + "уже ведёт курс " + course.getTitle());
+        }
     }
+
     public List<Course> getCourses() {
         return courses;
     }
