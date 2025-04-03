@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class Instructor {
-    private String id;
+    private final String id;
 
-    private String name;
+    private final String name;
 
     private List<Course> courses = new ArrayList<>();
 
@@ -21,20 +21,8 @@ public class Instructor {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
     }
 
     @Override
@@ -50,10 +38,11 @@ public class Instructor {
     }
 
     void assignCourse(Course course) {
-        courses.add(course);
-        System.out.println("Преподаватель " + name + "назначен на курс " + course.getTitle());
         if (course.getInstructor().getName().contains(course.getTitle())) {
             System.out.println("Преподаватель " + name + "уже ведёт курс " + course.getTitle());
+        } else {
+            courses.add(course);
+            System.out.println("Преподаватель " + name + "назначен на курс " + course.getTitle());
         }
     }
 
