@@ -3,6 +3,7 @@ package service;
 import exception.DuplicateStudentException;
 import model.Course;
 import model.Grade;
+import model.Instructor;
 import model.Student;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class StudyManager {
     List<Student> students = new ArrayList<>();
     List<Course> courses = new ArrayList<>();
 
-    public void registerStudent(Student student) {
+    public void registerStudent(Student student) throws DuplicateStudentException {
         if (!students.contains(student)) {
             students.add(student);
             System.out.println("Студент " + student.getName() + " зарегистрирован в системе");
