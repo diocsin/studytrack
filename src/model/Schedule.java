@@ -7,6 +7,15 @@ public class Schedule {
     private String time;
     private String room;
 
+    public boolean conflictsWith(Schedule other) {
+        String dayOfWeek1 = other.dayOfWeek;
+        String time1 = other.time;
+        if (dayOfWeek1.equals(dayOfWeek) && time1.equals(time)) {
+            return true;
+        }
+        return false;
+    }
+
     public String getDayOfWeek() {
         return dayOfWeek;
     }
@@ -19,11 +28,8 @@ public class Schedule {
         return time;
     }
 
-    public boolean conflictsWith(Schedule other){
-        String dayOfWeek1 = other.dayOfWeek;
-        String time1 = other.time;
-
-
-        return false;
+    @Override
+    public String toString() {
+        return "| День " + dayOfWeek + "| Время " + time + "| Аудитория " + room;
     }
 }
