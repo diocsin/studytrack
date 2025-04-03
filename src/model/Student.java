@@ -1,8 +1,5 @@
 package model;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Student {
     private String id;
@@ -10,6 +7,14 @@ public class Student {
     private int age;
     private List<Course> enrolledCourses = new ArrayList<>();
     private Map<Course, Grade> grades = new HashMap<>();
+
+    public Student(String id, String name, int age, List<Course> enrolledCourses, Map<Course, Grade> grades) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.enrolledCourses = enrolledCourses;
+        this.grades = grades;
+    }
 
     public List<Course> getEnrolledCourses() {
         return enrolledCourses;
@@ -64,4 +69,15 @@ public class Student {
         return average_grade;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return Objects.equals(id, student.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }
