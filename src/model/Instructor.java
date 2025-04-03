@@ -38,7 +38,7 @@ public class Instructor {
     }
 
     void assignCourse(Course course) {
-        if (course.getInstructor().getName().contains(course.getTitle())) {
+        if (courses.contains(course)) {
             System.out.println("Преподаватель " + name + "уже ведёт курс " + course.getTitle());
         } else {
             courses.add(course);
