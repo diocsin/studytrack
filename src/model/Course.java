@@ -3,6 +3,7 @@ package model;
 import exception.DuplicateStudentException;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class Course {
@@ -38,20 +39,35 @@ public class Course {
         return instructor;
     }
 
-    public boolean hasSpace(){
-        if (enrolledStudents.size()<capacity){
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        return Objects.equals(courseId, course.courseId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(courseId);
+    }
+
+    public boolean hasSpace() {
+        if (enrolledStudents.size() < capacity) {
             return true;
         }
         return false;
     }
 
-    public void enrollStudent(Student student)throws DuplicateStudentException {
+    public void enrollStudent(Student student) {
+        if (enrolledStudents.contains(student)) {
+            System.out.println(" Студент уже зачислен на курс " + getTitle());
+        }
 
-
-
-    }
-
-    boolean conflictsWith(Schedule other){
-        return true;
+        if (enrolledStudents.size() <= capacity) {
+            enrolledStudents.add(student);
+            System.out.println(" Студент зачислен на курс " + getTitle());
+        } else {
+            System.out.println("Ошибка: курс " + title + " заполнен");
+        }
     }
 }

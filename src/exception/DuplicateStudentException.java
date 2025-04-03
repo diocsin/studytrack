@@ -2,7 +2,7 @@ package exception;
 
 public class DuplicateStudentException extends Exception{
 
-    public DuplicateStudentException(String message) {
+    public DuplicateStudentException() {
         super(message);
     }
 }
