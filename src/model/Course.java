@@ -1,7 +1,5 @@
 package model;
 
-import exception.DuplicateStudentException;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,20 +36,21 @@ public class Course {
         return instructor;
     }
 
-    public boolean hasSpace(){
-        if (enrolledStudents.size()<capacity){
+    public boolean hasSpace() {
+        if (enrolledStudents.size() < capacity) {
             return true;
         }
         return false;
     }
 
-    public void enrollStudent(Student student)throws DuplicateStudentException {
-
-
-
-    }
-
-    boolean conflictsWith(Schedule other){
-        return true;
+    public void enrollStudent(Student student) {
+        if (enrolledStudents.contains(student)) {
+            System.out.println("Студент уже записан на " + title);
+        }
+        if (enrolledStudents.size() < capacity) {
+            enrolledStudents.add(student);
+        } else if (enrolledStudents.size() == capacity) {
+            System.out.println("Ошибка: курс " + title + " заполнен");
+        }
     }
 }
