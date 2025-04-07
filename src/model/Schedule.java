@@ -5,6 +5,12 @@ public class Schedule {
     private String time;
     private String room;
 
+    public Schedule(String dayOfWeek, String room, String time) {
+        this.dayOfWeek = dayOfWeek;
+        this.room = room;
+        this.time = time;
+    }
+
     public boolean conflictsWith(Schedule other) {
         String dayOfWeek1 = other.dayOfWeek;
         String time1 = other.time;
