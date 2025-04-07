@@ -36,6 +36,30 @@ public class Course {
         return instructor;
     }
 
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
+    }
+
+    public void setEnrolledStudents(Set<Student> enrolledStudents) {
+        this.enrolledStudents = enrolledStudents;
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
+    }
+
     public boolean hasSpace() {
         if (enrolledStudents.size() < capacity) {
             return true;
