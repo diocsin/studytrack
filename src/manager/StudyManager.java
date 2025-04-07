@@ -17,17 +17,22 @@ public class StudyManager {
     private List<Course> courses = new ArrayList<>();
     private List<Instructor> instructors = new ArrayList<>();
 
+    private RegistrationService registrationService;
+
     public void registerStudent(Student student) {
         if (students.contains(student)) {
-            System.out.println("Студент " + student.getName()
+            System.out.println("Студент уже" + student.getName()
                     + " зарегистрирован в системе");
         } else students.add(student);
+        System.out.println("Студент " + student.getName()
+                + " зарегистрирован в системе");
     }
 
     public void createCourse(Course course) {
         if (courses.contains(course)) {
-            System.out.println("Курс " + course.getTitle() + " создан");
+            System.out.println("Курс уже" + course.getTitle() + " создан");
         } else courses.add(course);
+        System.out.println("Курс " + course.getTitle() + " создан");
     }
 
     public void assignInstructor(Course course, Instructor instructor) {
@@ -40,7 +45,7 @@ public class StudyManager {
 
     public void enroll(Student student, Course course) {
         try {
-            RegistrationService.registerStudentToCourse(student, course);
+            registrationService.registerStudentToCourse(student, course);
         } catch (DuplicateStudentException | ScheduleConflictException | CourseFullException e) {
             System.out.println(e.getMessage());
         }
