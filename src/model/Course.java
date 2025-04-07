@@ -12,6 +12,12 @@ public class Course {
     private Set<Student> enrolledStudents = new HashSet<>();
     private Instructor instructor;
 
+    public Course(String courseId, String title, int capacity) {
+        this.courseId = courseId;
+        this.title = title;
+        this.capacity = capacity;
+    }
+
     public String getCourseId() {
         return courseId;
     }
