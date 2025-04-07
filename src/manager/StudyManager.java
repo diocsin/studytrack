@@ -15,6 +15,19 @@ public class StudyManager {
 
     List<Student> students = new ArrayList<>();
     List<Course> courses = new ArrayList<>();
+    List<Instructor> instructors = new ArrayList<>();
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public List<Instructor> getInstructors() {
+        return instructors;
+    }
 
     public void registerStudent(Student student) {
         if (students.contains(student)) {
@@ -32,6 +45,7 @@ public class StudyManager {
     public void assignInstructor(Course course, Instructor instructor) {
         instructor.assignCourse(course);
         course.setInstructor(instructor);
+        instructors.add(instructor);
         System.out.println("Преподаватель " + instructor.getName()
                 + " назначен на курс " + course.getTitle());
     }
