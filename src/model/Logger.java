@@ -18,13 +18,11 @@ public class Logger {
         String time = LocalDateTime.now().toString();
         String st = String.format("[%s] [%s] Студент создан", time, sourceName);
 
-        try (
-                BufferedWriter writer = new BufferedWriter(new
-                        FileWriter("Log.txt", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new
+                FileWriter("Log.txt", true))) {
             writer.write(st);
             writer.newLine();
-        } catch (
-                IOException e) {
+        } catch (IOException e) {
             System.out.println("Неудалось записать в файл");
         }
     }
