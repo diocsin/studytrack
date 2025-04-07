@@ -13,21 +13,9 @@ import java.util.List;
 
 public class StudyManager {
 
-    List<Student> students = new ArrayList<>();
-    List<Course> courses = new ArrayList<>();
-    List<Instructor> instructors = new ArrayList<>();
-
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public List<Course> getCourses() {
-        return courses;
-    }
-
-    public List<Instructor> getInstructors() {
-        return instructors;
-    }
+    private List<Student> students = new ArrayList<>();
+    private List<Course> courses = new ArrayList<>();
+    private List<Instructor> instructors = new ArrayList<>();
 
     public void registerStudent(Student student) {
         if (students.contains(student)) {
@@ -63,5 +51,17 @@ public class StudyManager {
         System.out.println("Оценка " + grade
                 + " назначена студенту " + student.getName()
                 + " за курс " + course.getTitle());
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public List<Instructor> getInstructors() {
+        return instructors;
     }
 }
