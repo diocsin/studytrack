@@ -1,5 +1,7 @@
 package ui;
 
+import model.Student;
+
 import java.util.Scanner;
 
 public class ConsoleMenu {
@@ -14,6 +16,7 @@ public class ConsoleMenu {
 
             switch (choose) {
                 case 1:
+                    Student student = addStudentMenu();
                     break;
                 case 2:
                     break;
@@ -49,6 +52,21 @@ public class ConsoleMenu {
         System.out.println("8. Показать всех преподователей и их курсы");
         System.out.println("9. Показать все курсы с расписанием");
         System.out.println("10. Выход");
+    }
+
+    public Student addStudentMenu() {
+        String id;
+        String name;
+        int age;
+
+        System.out.print("Имя студента: ");
+        name = scanner.next();
+        System.out.println("Возраст: ");
+        age = scanner.nextInt();
+        System.out.println("ID: ");
+        id = scanner.next();
+
+        return new Student(id, name, age);
     }
 
 }
