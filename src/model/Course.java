@@ -12,6 +12,12 @@ public class Course {
     private Set<Student> enrolledStudents = new HashSet<>();
     private Instructor instructor;
 
+    public Course(String courseId, String title, int capacity) {
+        this.courseId = courseId;
+        this.title = title;
+        this.capacity = capacity;
+    }
+
     public String getCourseId() {
         return courseId;
     }
@@ -34,30 +40,6 @@ public class Course {
 
     public Instructor getInstructor() {
         return instructor;
-    }
-
-    public void setCourseId(String courseId) {
-        this.courseId = courseId;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
-
-    public void setSchedule(Schedule schedule) {
-        this.schedule = schedule;
-    }
-
-    public void setEnrolledStudents(Set<Student> enrolledStudents) {
-        this.enrolledStudents = enrolledStudents;
-    }
-
-    public void setInstructor(Instructor instructor) {
-        this.instructor = instructor;
     }
 
     public boolean hasSpace() {
