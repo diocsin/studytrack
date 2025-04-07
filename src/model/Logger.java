@@ -15,25 +15,14 @@ public class Logger {
     }
 
     public void log(String message) {
-        LocalDateTime time = LocalDateTime.now();
-        String time1 = time.toString();
-        String.format("[%s] [%s] Студент создан", time1, sourceName);
-
-        try (
-                FileWriter fileWriter = new FileWriter("",
-                        true)) {
-            fileWriter.write();
-        } catch (
-                IOException e) {
-            log("Неудалось записать в файл");
-        }
+        String time = LocalDateTime.now().toString();
+        String st = String.format("[%s] [%s] Студент создан", time, sourceName);
 
         try (
                 BufferedWriter writer = new BufferedWriter(new
-                        FileWriter(""))) {
-            writer.write("Строка 1");
+                        FileWriter("Log.txt", true))) {
+            writer.write(st);
             writer.newLine();
-            writer.write("Строка 2");
         } catch (
                 IOException e) {
             System.out.println("Неудалось записать в файл");
