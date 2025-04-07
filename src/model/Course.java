@@ -1,5 +1,7 @@
 package model;
 
+import exception.DuplicateStudentException;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,6 +13,13 @@ public class Course {
     private Schedule schedule;
     private Set<Student> enrolledStudents = new HashSet<>();
     private Instructor instructor;
+
+    public Course(String courseId, String title, int capacity, Schedule schedule) {
+        this.courseId = courseId;
+        this.title = title;
+        this.capacity = capacity;
+        this.schedule = schedule;
+    }
 
     public String getCourseId() {
         return courseId;
@@ -34,6 +43,30 @@ public class Course {
 
     public Instructor getInstructor() {
         return instructor;
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
+    }
+
+    public void setEnrolledStudents(Set<Student> enrolledStudents) {
+        this.enrolledStudents = enrolledStudents;
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
     }
 
     public boolean hasSpace() {
