@@ -23,7 +23,7 @@ public class StatisticsService {
         return averageCourseGrade;
     }
     public List<Student> getTopStudents(List<Student> allStudents, int count){
-        List<Student> topStudents = new ArrayList<Student>();
+        List<Student> topStudents = new ArrayList<>();
         allStudents.sort(new AverageGradeComparator());
         allStudents.reversed();
         if(count > allStudents.size()){
@@ -36,7 +36,7 @@ public class StatisticsService {
         return topStudents;
     }
     public Map<Grade, Integer> getCountByGrade(Course course){
-        Map<Grade, Integer> countByGrade = new HashMap<Grade, Integer>();
+        Map<Grade, Integer> countByGrade = new HashMap<>();
         for (Student enrolledStudent : course.getEnrolledStudents()) {
             Grade grade = enrolledStudent.getGrades().get(course);
             if(enrolledStudent.getGrades().containsKey(course)){
