@@ -1,5 +1,7 @@
 package model;
 
+import exception.DuplicateStudentException;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,10 +14,11 @@ public class Course {
     private Set<Student> enrolledStudents = new HashSet<>();
     private Instructor instructor;
 
-    public Course(String courseId, String title, int capacity) {
+    public Course(String courseId, String title, int capacity, Schedule schedule) {
         this.courseId = courseId;
         this.title = title;
         this.capacity = capacity;
+        this.schedule = schedule;
     }
 
     public String getCourseId() {
