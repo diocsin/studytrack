@@ -8,38 +8,38 @@ import model.Student;
 import java.util.*;
 
 public class StatisticsService {
-    public double getAverageForCourse(Course course){
+
+    public double getAverageForCourse(Course course) {
         double averageCourseGrade = 0.0;
         int countStudents = 0;
         for (Student enrolledStudent : course.getEnrolledStudents()) {
-            if(enrolledStudent.getEnrolledCourses().contains(course)){
+            if (enrolledStudent.getEnrolledCourses().contains(course)) {
                 countStudents++;
                 averageCourseGrade += enrolledStudent.getGrades().get(course).getValue();
             }
         }
-        if(countStudents != 0){
+        if (countStudents != 0) {
             averageCourseGrade /= countStudents;
         }
         return averageCourseGrade;
     }
-    public List<Student> getTopStudents(List<Student> allStudents, int count){
-        List<Student> topStudents = new ArrayList<>();
+
+    public List<Student> getTopStudents(List<Student> allStudents, int count) {
         allStudents.sort(new AverageGradeComparator());
         allStudents.reversed();
-        if(count > allStudents.size()){
-            topStudents.addAll(allStudents);
+        if (count > allStudents.size()) {
+            return allStudents;
         } else {
-            for (int i = 0; i < count; i++){
-                topStudents.add(allStudents.get(i));
-            }
+            allStudents.subList(0, count);
         }
-        return topStudents;
+        return allStudents;
     }
-    public Map<Grade, Integer> getCountByGrade(Course course){
+
+    public Map<Grade, Integer> getCountByGrade(Course course) {
         Map<Grade, Integer> countByGrade = new HashMap<>();
         for (Student enrolledStudent : course.getEnrolledStudents()) {
             Grade grade = enrolledStudent.getGrades().get(course);
-            if(enrolledStudent.getGrades().containsKey(course)){
+            if (enrolledStudent.getGrades().containsKey(course)) {
                 if (grade != null) {
                     countByGrade.put(grade, countByGrade.getOrDefault(grade, 0) + 1);
                 }
