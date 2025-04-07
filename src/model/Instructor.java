@@ -17,6 +17,19 @@ public class Instructor {
         this.courses = courses;
     }
 
+    public void assignCourse(Course course) {
+        if (courses.contains(course)) {
+            System.out.println("Преподаватель " + name + "уже ведёт курс " + course.getTitle());
+        } else {
+            courses.add(course);
+            System.out.println("Преподаватель " + name + "назначен на курс " + course.getTitle());
+        }
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
     public String getId() {
         return id;
     }
@@ -35,18 +48,5 @@ public class Instructor {
     @Override
     public int hashCode() {
         return Objects.hashCode(courses);
-    }
-
-    void assignCourse(Course course) {
-        if (courses.contains(course)) {
-            System.out.println("Преподаватель " + name + "уже ведёт курс " + course.getTitle());
-        } else {
-            courses.add(course);
-            System.out.println("Преподаватель " + name + "назначен на курс " + course.getTitle());
-        }
-    }
-
-    public List<Course> getCourses() {
-        return courses;
     }
 }
