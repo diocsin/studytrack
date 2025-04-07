@@ -1,5 +1,8 @@
 package ui;
 
+import manager.StudyManager;
+import model.Course;
+import model.Schedule;
 import model.Student;
 
 import java.util.Scanner;
@@ -7,18 +10,25 @@ import java.util.Scanner;
 public class ConsoleMenu {
 
     private Scanner scanner = new Scanner(System.in);
+    private StudyManager studyManager = new StudyManager();
 
     public void start() {
         while (true) {
+            Student student;
+            Course course;
+
             mainMenu();
             System.out.print("Выберите действие: ");
             int choose = scanner.nextInt();
 
             switch (choose) {
                 case 1:
-                    Student student = addStudentMenu();
+                    student = addStudentMenu();
+                    studyManager.registerStudent(student);
                     break;
                 case 2:
+                    course = addCourseMenu();
+                    studyManager.createCourse(course);
                     break;
                 case 3:
                     break;
@@ -67,6 +77,33 @@ public class ConsoleMenu {
         id = scanner.next();
 
         return new Student(id, name, age);
+    }
+
+    public Course addCourseMenu() {
+        String id;
+        String title;
+        String dayOfWeek;
+        String time;
+        String room;
+        Schedule schedule;
+        int capacity;
+
+        System.out.print("Название курса: ");
+        title = scanner.next();
+        System.out.print("ID курса: ");
+        id = scanner.next();
+        System.out.print("Вместимость: ");
+        capacity = scanner.nextInt();
+        System.out.print("День недели: ");
+        dayOfWeek = scanner.next();
+        System.out.print("Время: ");
+        time = scanner.next();
+        System.out.print("Аудитория: ");
+        room = scanner.next();
+
+        schedule = new Schedule(dayOfWeek, time, room);
+
+        return new Course(id, title, capacity, schedule);
     }
 
 }
