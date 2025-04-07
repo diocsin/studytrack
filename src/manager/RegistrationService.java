@@ -21,6 +21,7 @@ public class RegistrationService {
                 throw new ScheduleConflictException("Ошибка: конфликт расписания у студента: " + student.getName() + " с курсом " + course.getTitle());
             }
         }
+
         course.enrollStudent(student);
         student.enroll(course);
     }
