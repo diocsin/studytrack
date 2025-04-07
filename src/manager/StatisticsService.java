@@ -13,12 +13,14 @@ import java.util.Map;
 public class StatisticsService {
     public double getAverageForCourse(Course course){
         double averageCourseGrade = 0.0;
+        int countStudents = 0;
         for (Student enrolledStudent : course.getEnrolledStudents()) {
             if(enrolledStudent.getEnrolledCourses().contains(course)){
-                averageCourseGrade = enrolledStudent.getGrades().get(course).getValue();
+                countStudents++;
+                averageCourseGrade += enrolledStudent.getGrades().get(course).getValue();
             }
         }
-        return averageCourseGrade;
+        return averageCourseGrade/countStudents;
     }
     public List<Student> getTopStudents(List<Student> allStudents, int count){
         List<Student> topStudents = new ArrayList<Student>();
