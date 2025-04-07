@@ -4,7 +4,6 @@ import exception.CourseFullException;
 import exception.DuplicateStudentException;
 import exception.ScheduleConflictException;
 import model.Course;
-import model.Schedule;
 import model.Student;
 
 public class RegistrationService {
@@ -17,16 +16,13 @@ public class RegistrationService {
         if (!course.hasSpace()) {
             throw new CourseFullException("Ошибка: курс " + course.getTitle() + " заполнен");
         }
-        for (Course enrolledCours : student.getEnrolledCourses()) {
-            if (enrolledCours.getSchedule().conflictsWith(course.getSchedule())){
-                throw  new ScheduleConflictException("Ошибка: конфликт расписания у студента: " + student.getName() + " с курсом "+ course.getTitle());
-            } else {
-                course.enrollStudent(student);
-                student.enroll(course);
+        for (Course enrolledCourses : student.getEnrolledCourses()) {
+            if (enrolledCourses.getSchedule().conflictsWith(course.getSchedule())) {
+                throw new ScheduleConflictException("Ошибка: конфликт расписания у студента: " + student.getName() + " с курсом " + course.getTitle());
             }
         }
-        //Если расписание курса конфликтует с другими курсами студента (использовать schedule.conflictsWith): → Вывести: "Ошибка: конфликт расписания у студента (name) с курсом (title)" → Бросить ScheduleConflictException
-        //Иначе: → Вызвать course.enrollStudent(student) → Вызвать student.enroll(course)
+        course.enrollStudent(student);
+        student.enroll(course);
     }
 
 
