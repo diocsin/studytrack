@@ -13,8 +13,8 @@ import java.util.List;
 
 public class StudyManager {
 
-    List<Student> students =  new ArrayList<>();
-    List<Course> courses =  new ArrayList<>();
+    List<Student> students = new ArrayList<>();
+    List<Course> courses = new ArrayList<>();
 
     public void registerStudent(Student student) {
         if (students.contains(student)) {
@@ -29,12 +29,12 @@ public class StudyManager {
         } else courses.add(course);
     }
 
-   public void assignInstructor(Course course, Instructor instructor){
-       instructor.assignCourse(course);
-       course.setInstructor(instructor);
-       System.out.println("Преподаватель " + instructor.getName()
-               + " назначен на курс " + course.getTitle());
-   }
+    public void assignInstructor(Course course, Instructor instructor) {
+        instructor.assignCourse(course);
+        course.setInstructor(instructor);
+        System.out.println("Преподаватель " + instructor.getName()
+                + " назначен на курс " + course.getTitle());
+    }
 
     public void enroll(Student student, Course course) {
         try {
@@ -45,19 +45,9 @@ public class StudyManager {
     }
 
     public void assignGrade(Student student, Course course, Grade grade) {
-       student.assignGrade(course, grade);
+        student.assignGrade(course, grade);
         System.out.println("Оценка " + grade
                 + " назначена студенту " + student.getName()
                 + " за курс " + course.getTitle());
     }
-
-
-
-
-
-
-
-
-
-
 }
