@@ -8,6 +8,16 @@ import model.Student;
 import java.util.*;
 
 public class StatisticsService {
+    private static StatisticsService instance;
+
+    private StatisticsService() {
+    }
+    public static StatisticsService getInstance(){
+        if (instance == null) {
+            instance = new StatisticsService();
+        }
+        return instance;
+    }
 
     public double getAverageForCourse(Course course) {
         double averageCourseGrade = 0.0;

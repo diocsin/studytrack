@@ -12,12 +12,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudyManager {
-
+    private static StudyManager instance;
     private List<Student> students = new ArrayList<>();
     private List<Course> courses = new ArrayList<>();
     private List<Instructor> instructors = new ArrayList<>();
 
     private RegistrationService registrationService;
+
+    private StudyManager() {
+    }
+
+    public static StudyManager getInstance() {
+        if (instance == null) {
+            instance = new StudyManager();
+        }
+        return instance;
+    }
 
     public void registerStudent(Student student) {
         if (students.contains(student)) {
