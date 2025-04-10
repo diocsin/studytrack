@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class ExportService {
 
-    public static final String FILE_NAME = "service/ExportService.java";
+    public static final String FILE_NAME = "export/Export.txt";
     private static ExportService instance;
 
     private ExportService() {
