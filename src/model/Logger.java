@@ -12,7 +12,7 @@ public class Logger {
     private String logFile;
     private String sourceName;
 
-    public Logger(String logFile, String sourceName) throws IOException {
+    public Logger(String logFile, String sourceName) {
         this.logFile = logFile;
         this.sourceName = sourceName;
     }
