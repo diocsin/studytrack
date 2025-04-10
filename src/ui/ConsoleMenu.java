@@ -35,6 +35,7 @@ public class ConsoleMenu {
                     setInstructorMenu();
                     break;
                 case 4:
+                    setStudentMenu();
                     break;
                 case 5:
                     break;
@@ -168,6 +169,16 @@ public class ConsoleMenu {
             if (c.getCourseId().equals(courseId)) {
                 course = c;
             }
+        }
+
+        if (student == null) {
+            System.out.println("Студент с таким ID не найден");
+            return;
+        }
+
+        if (course == null) {
+            System.out.println("Курс с таким ID не найден");
+            return;
         }
 
         studyManager.enroll(student, course);
