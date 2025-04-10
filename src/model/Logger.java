@@ -1,15 +1,18 @@
 package model;
 
+import factory.LoggerFactory;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class Logger {
+    private final Logger logger = LoggerFactory.createLogger("logger");
     private String logFile;
     private String sourceName;
 
-    public Logger(String logFile, String sourceName) throws IOException {
+    public Logger(String logFile, String sourceName) {
         this.logFile = logFile;
         this.sourceName = sourceName;
     }
@@ -23,7 +26,7 @@ public class Logger {
             writer.write(st);
             writer.newLine();
         } catch (IOException e) {
-            System.out.println("Неудалось записать в файл");
+            logger.log("Не удалось записать в файл");
         }
     }
 

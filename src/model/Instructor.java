@@ -1,10 +1,13 @@
 package model;
 
+import factory.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Instructor {
+    private final Logger logger = LoggerFactory.createLogger("instructor");
     private final String id;
 
     private final String name;
@@ -19,10 +22,10 @@ public class Instructor {
 
     public void assignCourse(Course course) {
         if (courses.contains(course)) {
-            System.out.println("Преподаватель " + name + "уже ведёт курс " + course.getTitle());
+           logger.log("Преподаватель " + name + "уже ведёт курс " + course.getTitle());
         } else {
             courses.add(course);
-            System.out.println("Преподаватель " + name + "назначен на курс " + course.getTitle());
+            logger.log("Преподаватель " + name + "назначен на курс " + course.getTitle());
         }
     }
 
