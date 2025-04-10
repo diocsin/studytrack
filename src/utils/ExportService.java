@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.util.Map;
 
 public class ExportService {
+
+    public static final String FILE_NAME = "service/ExportService.java";
     private static ExportService instance;
 
     private ExportService() {
