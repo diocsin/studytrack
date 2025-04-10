@@ -193,6 +193,7 @@ public class ConsoleMenu {
             }
         }
 
+
         try {
             grade = Grade.valueOf(strGrade);
         } catch (IllegalArgumentException e) {
