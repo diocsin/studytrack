@@ -15,20 +15,9 @@ public class ExportService {
     public static final String FILE_NAME = "export/Export.txt";
     private static ExportService instance;
 
-    private ExportService() {
-    }
-
-    public static ExportService getInstance() {
-        if (instance == null) {
-            instance = new ExportService();
-        }
-        return instance;
-    }
-
     public void exportStudentsToFile(String filePath) {
-        StudyManager studyManager = new StudyManager();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            for (Student student : studyManager.getStudents()) {
+            for (Student student : StudyManager.getInstance().getStudents()) {
                 writer.write("Student: " + student.getName());
                 writer.newLine();
                 for (Map.Entry<Course, Grade> entry : student.getGrades().entrySet()) {
