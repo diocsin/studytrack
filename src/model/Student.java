@@ -1,4 +1,5 @@
 package model;
+
 import factory.LoggerFactory;
 
 import java.util.*;
@@ -70,16 +71,16 @@ public class Student {
     }
 
     public void enroll(Course course) {
-        if(!enrolledCourses.contains(course)){
+        if (!enrolledCourses.contains(course)) {
             enrolledCourses.add(course);
         } else {
             logger.log("Студент записан на курс");
-            }
         }
+    }
 
     public void assignGrade(Course course, Grade grade) {
-        if(enrolledCourses.contains(course)){
-            grades.put(course,grade);
+        if (enrolledCourses.contains(course)) {
+            grades.put(course, grade);
             logger.log("Оценка выставлена студенту по курсу");
         } else {
             logger.log("Ошибка: студент не записан на курс");

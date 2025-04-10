@@ -26,7 +26,7 @@ public class Logger {
             writer.write(st);
             writer.newLine();
         } catch (IOException e) {
-            System.out.println("Неудалось записать в файл");
+            logger.log("Не удалось записать в файл");
         }
     }
 
