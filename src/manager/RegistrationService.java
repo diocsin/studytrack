@@ -12,7 +12,7 @@ public class RegistrationService {
     private RegistrationService() {
     }
 
-    private void registerStudentToCourse(Student student, Course course) throws DuplicateStudentException,
+    public void registerStudentToCourse(Student student, Course course) throws DuplicateStudentException,
             CourseFullException, ScheduleConflictException {
         if (course.getEnrolledStudents().contains(student)) {
             throw new DuplicateStudentException("Студент " + student.getName() + " уже записан на курс ( " + course.getTitle() + " )");
