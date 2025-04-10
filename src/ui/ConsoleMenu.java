@@ -1,10 +1,15 @@
 package ui;
 
+import exception.CourseNotFoundException;
 import manager.StudyManager;
 import model.Course;
+import model.Instructor;
 import model.Schedule;
 import model.Student;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ConsoleMenu {
@@ -104,6 +109,46 @@ public class ConsoleMenu {
         schedule = new Schedule(dayOfWeek, time, room);
 
         return new Course(id, title, capacity, schedule);
+    }
+
+    public void setIntructorMenu() {
+        String name;
+        String id;
+        String courseId;
+        Instructor instructor = null;
+        Course course = null;
+
+        System.out.print("Имя преподавателя: ");
+        name = scanner.next();
+        System.out.print("ID преподавателя: ");
+        id = scanner.next();
+        System.out.print("ID курса для назначения: ");
+        courseId = scanner.next();
+
+        for (Course c : studyManager.getCourses()) {
+            if (c.getCourseId().equals(courseId)) {
+                course = c;
+            }
+        }
+
+        for (Instructor i : studyManager.getInstructors()) {
+            if (i.getId().equals(id)) {
+                instructor = i;
+            }
+        }
+
+        if (course == null) {
+            System.out.println("Курс с таким ID не найден");
+            return;
+        }
+
+        if (instructor == null) {
+            System.out.println("Преподаватель с таким ID не найден");
+            return;
+        }
+
+        studyManager.assignInstructor(course, instructor);
+
     }
 
 }
