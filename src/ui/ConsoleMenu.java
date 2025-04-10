@@ -32,7 +32,7 @@ public class ConsoleMenu {
                     studyManager.createCourse(course);
                     break;
                 case 3:
-                    setIntructorMenu();
+                    setInstructorMenu();
                     break;
                 case 4:
                     break;
@@ -108,7 +108,7 @@ public class ConsoleMenu {
         return new Course(id, title, capacity, schedule);
     }
 
-    public void setIntructorMenu() {
+    public void setInstructorMenu() {
         String name;
         String id;
         String courseId;
@@ -145,6 +145,32 @@ public class ConsoleMenu {
         }
 
         studyManager.assignInstructor(course, instructor);
+    }
+
+    public void setStudentMenu() {
+        String id;
+        String courseId;
+        Student student = null;
+        Course course = null;
+
+        System.out.println("ID студента: ");
+        id = scanner.next();
+        System.out.println("ID курса: ");
+        courseId = scanner.next();
+
+        for (Student s : studyManager.getStudents()) {
+            if (s.getId().equals(id)) {
+                student = s;
+            }
+        }
+
+        for (Course c : studyManager.getCourses()) {
+            if (c.getCourseId().equals(courseId)) {
+                course = c;
+            }
+        }
+
+        studyManager.enroll(student, course);
 
     }
 
