@@ -8,40 +8,33 @@ public class Logger {
     private String logFile;
     private String sourceName;
 
-    public Logger(String logFile, String sourceName) throws IOException {
+    public Logger(String logFile, String sourceName) {
         this.logFile = logFile;
         this.sourceName = sourceName;
     }
 
     public void log(String message) {
 
-    }
 
-    try(
-    FileWriter fileWriter = new FileWriter("",
-            true))
+        try (
+                FileWriter fileWriter = new FileWriter("",
+                        true)) {
+            fileWriter.write();
+        } catch (
+                IOException e) {
+            System.out.println("Неудалось записать в файл");
+        }
 
-    {
-        fileWriter.write();
-    } catch(
-    IOException e)
-
-    {
-        System.out.println("Неудалось записать в файл");
-    }
-
-                try(
-    BufferedWriter writer = new BufferedWriter(new
-            FileWriter("")))
-
-    {
-        writer.write("Строка 1");
-        writer.newLine();
-        writer.write("Строка 2");
-    } catch(
-    IOException e)
-    {
-        System.out.println("Неудалось записать в файл");
+        try (
+                BufferedWriter writer = new BufferedWriter(new
+                        FileWriter(""))) {
+            writer.write("Строка 1");
+            writer.newLine();
+            writer.write("Строка 2");
+        } catch (
+                IOException e) {
+            System.out.println("Неудалось записать в файл");
+        }
     }
 
     public String getLogFile() {
