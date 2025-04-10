@@ -3,43 +3,53 @@ package manager;
 import exception.CourseFullException;
 import exception.DuplicateStudentException;
 import exception.ScheduleConflictException;
-import model.Course;
-import model.Grade;
-import model.Instructor;
-import model.Student;
+import factory.LoggerFactory;
+import model.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class StudyManager {
+    private final Logger logger = LoggerFactory.createLogger("studyManager");
 
+    private static StudyManager instance;
     private List<Student> students = new ArrayList<>();
     private List<Course> courses = new ArrayList<>();
     private List<Instructor> instructors = new ArrayList<>();
 
     private RegistrationService registrationService;
 
+    private StudyManager() {
+    }
+
+    public static StudyManager getInstance() {
+        if (instance == null) {
+            instance = new StudyManager();
+        }
+        return instance;
+    }
+
     public void registerStudent(Student student) {
         if (students.contains(student)) {
-            System.out.println("Студент уже" + student.getName()
+            logger.log("Студент уже" + student.getName()
                     + " зарегистрирован в системе");
         } else students.add(student);
-        System.out.println("Студент " + student.getName()
+        logger.log("Студент " + student.getName()
                 + " зарегистрирован в системе");
     }
 
     public void createCourse(Course course) {
         if (courses.contains(course)) {
-            System.out.println("Курс уже" + course.getTitle() + " создан");
+            logger.log("Курс уже" + course.getTitle() + " создан");
         } else courses.add(course);
-        System.out.println("Курс " + course.getTitle() + " создан");
+        logger.log("Курс " + course.getTitle() + " создан");
     }
 
     public void assignInstructor(Course course, Instructor instructor) {
         instructor.assignCourse(course);
         course.setInstructor(instructor);
         instructors.add(instructor);
-        System.out.println("Преподаватель " + instructor.getName()
+        logger.log("Преподаватель " + instructor.getName()
                 + " назначен на курс " + course.getTitle());
     }
 
@@ -47,13 +57,13 @@ public class StudyManager {
         try {
             registrationService.registerStudentToCourse(student, course);
         } catch (DuplicateStudentException | ScheduleConflictException | CourseFullException e) {
-            System.out.println(e.getMessage());
+            logger.log(e.getMessage());
         }
     }
 
     public void assignGrade(Student student, Course course, Grade grade) {
         student.assignGrade(course, grade);
-        System.out.println("Оценка " + grade
+        logger.log("Оценка " + grade
                 + " назначена студенту " + student.getName()
                 + " за курс " + course.getTitle());
     }
