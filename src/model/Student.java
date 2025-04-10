@@ -1,7 +1,10 @@
 package model;
+import factory.LoggerFactory;
+
 import java.util.*;
 
 public class Student {
+    private final Logger logger = LoggerFactory.createLogger("student");
     private String id;
     private String name;
     private int age;
@@ -45,15 +48,16 @@ public class Student {
     public void enroll(Course course) {
         if(!enrolledCourses.contains(course)){
             enrolledCourses.add(course);
-        } else System.out.println("Студент записан на курс");
+        } else
+            logger.log("Студент записан на курс");
     }
 
     public void assignGrade(Course course, Grade grade) {
         if(enrolledCourses.contains(course)){
             grades.put(course,grade);
-            System.out.println("Оценка выставлена студенту по курсу");
+            logger.log("Оценка выставлена студенту по курсу");
         } else {
-            System.out.println("Ошибка: студент не записан на курс");
+            logger.log("Ошибка: студент не записан на курс");
         }
     }
 

@@ -1,10 +1,13 @@
 package model;
 
+import factory.LoggerFactory;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class Logger {
+    private final Logger logger = LoggerFactory.createLogger("logger");
     private String logFile;
     private String sourceName;
 
@@ -22,7 +25,7 @@ public class Logger {
             fileWriter.write();
         } catch (
                 IOException e) {
-            System.out.println("Неудалось записать в файл");
+            logger.log("Неудалось записать в файл");
         }
 
         try (
@@ -33,7 +36,7 @@ public class Logger {
             writer.write("Строка 2");
         } catch (
                 IOException e) {
-            System.out.println("Неудалось записать в файл");
+            logger.log("Неудалось записать в файл");
         }
     }
 
