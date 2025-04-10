@@ -27,7 +27,6 @@ public class Logger {
         }
     }
 
-
     public String getLogFile() {
         return logFile;
     }
