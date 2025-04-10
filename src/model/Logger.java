@@ -3,36 +3,26 @@ package model;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 public class Logger {
     private String logFile;
     private String sourceName;
 
-    public Logger(String logFile, String sourceName) {
+    public Logger(String logFile, String sourceName) throws IOException {
         this.logFile = logFile;
         this.sourceName = sourceName;
     }
 
     public void log(String message) {
+        String time = LocalDateTime.now().toString();
+        String st = String.format("[%s] [%s] Студент создан", time, sourceName);
 
-
-        try (
-                FileWriter fileWriter = new FileWriter("",
-                        true)) {
-            fileWriter.write();
-        } catch (
-                IOException e) {
-            System.out.println("Неудалось записать в файл");
-        }
-
-        try (
-                BufferedWriter writer = new BufferedWriter(new
-                        FileWriter(""))) {
-            writer.write("Строка 1");
+        try (BufferedWriter writer = new BufferedWriter(new
+                FileWriter("Log.txt", true))) {
+            writer.write(st);
             writer.newLine();
-            writer.write("Строка 2");
-        } catch (
-                IOException e) {
+        } catch (IOException e) {
             System.out.println("Неудалось записать в файл");
         }
     }
