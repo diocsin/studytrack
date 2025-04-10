@@ -1,17 +1,15 @@
 package ui;
 
+import exception.GradeNotFoundException;
 import manager.StudyManager;
-import model.Course;
-import model.Instructor;
-import model.Schedule;
-import model.Student;
+import model.*;
 
 import java.util.Scanner;
 
 public class ConsoleMenu {
 
     private final Scanner scanner = new Scanner(System.in);
-    private final StudyManager studyManager = new StudyManager();
+    private final StudyManager studyManager = StudyManager.getInstance();
 
     public void start() {
         while (true) {
@@ -38,6 +36,7 @@ public class ConsoleMenu {
                     setStudentMenu();
                     break;
                 case 5:
+                    setStudentGradeMenu();
                     break;
                 case 6:
                     break;
@@ -62,7 +61,7 @@ public class ConsoleMenu {
         System.out.println("5. Назначить оценку");
         System.out.println("6. Показать статистику по курсу");
         System.out.println("7. Показать всех студентов, их курсы и оценки");
-        System.out.println("8. Показать всех преподователей и их курсы");
+        System.out.println("8. Показать всех преподавателей и их курсы");
         System.out.println("9. Показать все курсы с расписанием");
         System.out.println("10. Выход");
     }
@@ -79,7 +78,10 @@ public class ConsoleMenu {
         System.out.println("ID: ");
         id = scanner.next();
 
-        return new Student(id, name, age);
+        return new Student.Builder(id)
+                .name(name)
+                .age(age)
+                .build();
     }
 
     public Course addCourseMenu() {
@@ -135,16 +137,6 @@ public class ConsoleMenu {
             }
         }
 
-        if (course == null) {
-            System.out.println("Курс с таким ID не найден");
-            return;
-        }
-
-        if (instructor == null) {
-            System.out.println("Преподаватель с таким ID или именем не найден");
-            return;
-        }
-
         studyManager.assignInstructor(course, instructor);
     }
 
@@ -171,18 +163,44 @@ public class ConsoleMenu {
             }
         }
 
-        if (student == null) {
-            System.out.println("Студент с таким ID не найден");
-            return;
-        }
-
-        if (course == null) {
-            System.out.println("Курс с таким ID не найден");
-            return;
-        }
-
         studyManager.enroll(student, course);
+    }
 
+    public void setStudentGradeMenu() {
+        String id;
+        String courseId;
+        Student student = null;
+        Course course = null;
+        Grade grade;
+        String strGrade;
+
+        System.out.println("ID студента: ");
+        id = scanner.next();
+        System.out.println("ID курса: ");
+        courseId = scanner.next();
+        System.out.println("Оценка (A, B, C, D, F): ");
+        strGrade = scanner.next();
+
+        for (Student s : studyManager.getStudents()) {
+            if (s.getId().equals(id)) {
+                student = s;
+            }
+        }
+
+        for (Course c : studyManager.getCourses()) {
+            if (c.getCourseId().equals(courseId)) {
+                course = c;
+            }
+        }
+
+        try {
+            grade = Grade.valueOf(strGrade);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Такой оценки не существует");
+            return;
+        }
+
+        studyManager.assignGrade(student, course, grade);
     }
 
 }
