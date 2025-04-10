@@ -11,10 +11,34 @@ public class Student {
     private List<Course> enrolledCourses = new ArrayList<>();
     private Map<Course, Grade> grades = new HashMap<>();
 
-    public Student(String id, String name, int age) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
+    public Student(Builder builder) {
+        this.id = builder.name;
+        this.name = builder.id;
+        this.age = builder.age;
+    }
+
+    public static class Builder {
+        private String name;
+        private int age;
+        private String id;
+
+        public Builder(String id) {
+            this.id = id;
+        }
+
+        public Builder age(int age) {
+            this.age = age;
+            return this;
+        }
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Student build() {
+            return new Student(this);
+        }
     }
 
     public List<Course> getEnrolledCourses() {
@@ -48,9 +72,10 @@ public class Student {
     public void enroll(Course course) {
         if(!enrolledCourses.contains(course)){
             enrolledCourses.add(course);
-        } else
+        } else {
             logger.log("Студент записан на курс");
-    }
+            }
+        }
 
     public void assignGrade(Course course, Grade grade) {
         if(enrolledCourses.contains(course)){
@@ -62,11 +87,11 @@ public class Student {
     }
 
     public double calculateAverageGrade() {
-        double average_grade = 0 ;
-        for(Map.Entry<Course,Grade> entry: grades.entrySet()){
+        double average_grade = 0;
+        for (Map.Entry<Course, Grade> entry : grades.entrySet()) {
             average_grade += entry.getValue().getValue();
         }
-        average_grade = average_grade/grades.size();
+        average_grade = average_grade / grades.size();
 
         return average_grade;
     }
