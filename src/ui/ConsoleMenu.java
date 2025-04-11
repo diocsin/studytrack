@@ -1,15 +1,17 @@
 package ui;
 
-import exception.GradeNotFoundException;
+import manager.StatisticsService;
 import manager.StudyManager;
 import model.*;
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class ConsoleMenu {
 
     private final Scanner scanner = new Scanner(System.in);
     private final StudyManager studyManager = StudyManager.getInstance();
+    private final StatisticsService statisticsService = StatisticsService.getInstance();
 
     public void start() {
         while (true) {
@@ -39,6 +41,7 @@ public class ConsoleMenu {
                     setStudentGradeMenu();
                     break;
                 case 6:
+                    showCourseStatisticMenu();
                     break;
                 case 7:
                     break;
@@ -203,5 +206,29 @@ public class ConsoleMenu {
 
         studyManager.assignGrade(student, course, grade);
     }
+
+    public void showCourseStatisticMenu() {
+        String courseId;
+        Course course = null;
+
+        System.out.println("ID курса: ");
+        courseId = scanner.next();
+
+        for (Course c : studyManager.getCourses()) {
+            if (c.getCourseId().equals(courseId)) {
+                course = c;
+            }
+        }
+
+        System.out.println(statisticsService.getAverageForCourse(course));
+
+        Map<Grade, Integer> countByGrade = statisticsService.getCountByGrade(course);
+
+        for (Map.Entry<Grade, Integer> entry : countByGrade.entrySet()) {
+            System.out.println(entry.getKey() + " : " + entry.getValue());
+        }
+
+    }
+
 
 }
