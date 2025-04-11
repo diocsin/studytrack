@@ -4,6 +4,7 @@ import manager.StatisticsService;
 import manager.StudyManager;
 import model.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -44,6 +45,7 @@ public class ConsoleMenu {
                     showCourseStatisticMenu();
                     break;
                 case 7:
+                    showAllStudents();
                     break;
                 case 8:
                     break;
@@ -230,5 +232,18 @@ public class ConsoleMenu {
 
     }
 
+    public void showAllStudents() {
+        List<Student> students = studyManager.getStudents();
+
+        for (Student student : students) {
+            System.out.println("Студент: " + student.getName());
+
+            Map<Course, Grade> grades = student.getGrades();
+
+            for (Map.Entry<Course, Grade> entry : grades.entrySet()) {
+                System.out.println("  Курс: " + entry.getKey().getTitle() + " | Оценка: " + entry.getValue());
+            }
+        }
+    }
 
 }
