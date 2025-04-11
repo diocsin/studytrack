@@ -48,6 +48,7 @@ public class ConsoleMenu {
                     showAllStudents();
                     break;
                 case 8:
+                    showAllInstructors();
                     break;
                 case 9:
                     break;
@@ -229,7 +230,6 @@ public class ConsoleMenu {
         for (Map.Entry<Grade, Integer> entry : countByGrade.entrySet()) {
             System.out.println(entry.getKey() + " : " + entry.getValue());
         }
-
     }
 
     public void showAllStudents() {
@@ -242,6 +242,20 @@ public class ConsoleMenu {
 
             for (Map.Entry<Course, Grade> entry : grades.entrySet()) {
                 System.out.println("  Курс: " + entry.getKey().getTitle() + " | Оценка: " + entry.getValue());
+            }
+        }
+    }
+
+    public void showAllInstructors() {
+        List<Instructor> instructors = studyManager.getInstructors();
+
+        for (Instructor instructor : instructors) {
+            System.out.println("Преподаватель: " + instructor.getName());
+
+            List<Course> courses = instructor.getCourses();
+
+            for (Course c : courses) {
+                System.out.println("  Введёт курс: " + c.getTitle());
             }
         }
     }
