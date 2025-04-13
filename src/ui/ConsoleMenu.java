@@ -3,7 +3,6 @@ package ui;
 import manager.StatisticsService;
 import manager.StudyManager;
 import model.*;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -16,21 +15,16 @@ public class ConsoleMenu {
 
     public void start() {
         while (true) {
-            Student student;
-            Course course;
-
             mainMenu();
             System.out.print("Выберите действие: ");
             int choose = scanner.nextInt();
 
             switch (choose) {
                 case 1:
-                    student = addStudentMenu();
-                    studyManager.registerStudent(student);
+                    addStudentMenu();
                     break;
                 case 2:
-                    course = addCourseMenu();
-                    studyManager.createCourse(course);
+                    addCourseMenu();
                     break;
                 case 3:
                     setInstructorMenu();
@@ -45,12 +39,13 @@ public class ConsoleMenu {
                     showCourseStatisticMenu();
                     break;
                 case 7:
-                    showAllStudents();
+                    showAllStudentsMenu();
                     break;
                 case 8:
-                    showAllInstructors();
+                    showAllInstructorsMenu();
                     break;
                 case 9:
+                    showAllCourseWMenu();
                     break;
                 case 10:
                     return;
@@ -72,25 +67,28 @@ public class ConsoleMenu {
         System.out.println("10. Выход");
     }
 
-    public Student addStudentMenu() {
+    public void addStudentMenu() {
         String id;
         String name;
         int age;
 
         System.out.print("Имя студента: ");
         name = scanner.next();
-        System.out.println("Возраст: ");
+        System.out.print("Возраст: ");
         age = scanner.nextInt();
-        System.out.println("ID: ");
+        System.out.print("ID: ");
         id = scanner.next();
 
-        return new Student.Builder(id)
+        Student student = new Student.Builder(id)
                 .name(name)
                 .age(age)
                 .build();
+
+        studyManager.registerStudent(student);
+        System.out.println("Студент " + name + " зарегистрирован в системе");
     }
 
-    public Course addCourseMenu() {
+    public void addCourseMenu() {
         String id;
         String title;
         String dayOfWeek;
@@ -114,7 +112,9 @@ public class ConsoleMenu {
 
         schedule = new Schedule(dayOfWeek, time, room);
 
-        return new Course(id, title, capacity, schedule);
+        Course course = new Course(id, title, capacity, schedule);
+        studyManager.createCourse(course);
+        System.out.println("Курс " + title + " создан");
     }
 
     public void setInstructorMenu() {
@@ -152,9 +152,9 @@ public class ConsoleMenu {
         Student student = null;
         Course course = null;
 
-        System.out.println("ID студента: ");
+        System.out.print("ID студента: ");
         id = scanner.next();
-        System.out.println("ID курса: ");
+        System.out.print("ID курса: ");
         courseId = scanner.next();
 
         for (Student s : studyManager.getStudents()) {
@@ -180,11 +180,11 @@ public class ConsoleMenu {
         Grade grade;
         String strGrade;
 
-        System.out.println("ID студента: ");
+        System.out.print("ID студента: ");
         id = scanner.next();
-        System.out.println("ID курса: ");
+        System.out.print("ID курса: ");
         courseId = scanner.next();
-        System.out.println("Оценка (A, B, C, D, F): ");
+        System.out.print("Оценка (A, B, C, D, F): ");
         strGrade = scanner.next();
 
         for (Student s : studyManager.getStudents()) {
@@ -224,7 +224,6 @@ public class ConsoleMenu {
         }
 
         System.out.println(statisticsService.getAverageForCourse(course));
-
         Map<Grade, Integer> countByGrade = statisticsService.getCountByGrade(course);
 
         for (Map.Entry<Grade, Integer> entry : countByGrade.entrySet()) {
@@ -232,7 +231,7 @@ public class ConsoleMenu {
         }
     }
 
-    public void showAllStudents() {
+    public void showAllStudentsMenu() {
         List<Student> students = studyManager.getStudents();
 
         for (Student student : students) {
@@ -246,7 +245,7 @@ public class ConsoleMenu {
         }
     }
 
-    public void showAllInstructors() {
+    public void showAllInstructorsMenu() {
         List<Instructor> instructors = studyManager.getInstructors();
 
         for (Instructor instructor : instructors) {
@@ -257,6 +256,15 @@ public class ConsoleMenu {
             for (Course c : courses) {
                 System.out.println("  Введёт курс: " + c.getTitle());
             }
+        }
+    }
+
+    public void showAllCourseWMenu() {
+        List<Course> courses = studyManager.getCourses();
+
+        for (Course c : courses) {
+            Schedule schedule = c.getSchedule();
+            System.out.println("Курс: " + c.getTitle() + " | ID: " + c.getCourseId() + " | Вместимость: " + c.getCapacity() + " День: " + schedule.getDayOfWeek() + " | Время: " + schedule.getTime() + " | Аудитория: " + schedule.getRoom());
         }
     }
 
