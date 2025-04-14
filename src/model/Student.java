@@ -13,8 +13,8 @@ public class Student {
     private Map<Course, Grade> grades = new HashMap<>();
 
     public Student(Builder builder) {
-        this.id = builder.name;
-        this.name = builder.id;
+        this.id = builder.id;
+        this.name = builder.name;
         this.age = builder.age;
     }
 
