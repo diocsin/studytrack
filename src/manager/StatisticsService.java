@@ -1,6 +1,5 @@
 package manager;
 
-import comparators.AverageGradeComparator;
 import model.Course;
 import model.Grade;
 import model.Student;
@@ -35,8 +34,7 @@ public class StatisticsService {
     }
 
     public List<Student> getTopStudents(List<Student> allStudents, int count) {
-        allStudents.sort(new AverageGradeComparator());
-        allStudents.reversed();
+        allStudents.sort((Student s1, Student s2) -> Double.compare(s2.calculateAverageGrade(), s1.calculateAverageGrade()));
         if (count > allStudents.size()) {
             return allStudents;
         } else {
