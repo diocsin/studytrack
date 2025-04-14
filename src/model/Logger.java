@@ -1,14 +1,11 @@
 package model;
 
-import factory.LoggerFactory;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class Logger {
-    private final Logger logger = LoggerFactory.createLogger("logger");
     private String logFile;
     private String sourceName;
 
@@ -22,19 +19,11 @@ public class Logger {
         String st = String.format("[%s] [%s] Студент создан", time, sourceName);
 
         try (BufferedWriter writer = new BufferedWriter(new
-                FileWriter("Log.txt", true))) {
+                FileWriter(logFile, true))) {
             writer.write(st);
             writer.newLine();
         } catch (IOException e) {
-            logger.log("Не удалось записать в файл");
+            System.out.println("Не удалось записать в файл");
         }
-    }
-
-    public String getLogFile() {
-        return logFile;
-    }
-
-    public String getSourceName() {
-        return sourceName;
     }
 }
