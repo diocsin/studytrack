@@ -143,6 +143,10 @@ public class ConsoleMenu {
             }
         }
 
+        if(instructor == null) {
+            instructor = new Instructor(id, name, "courses");
+        }
+
         studyManager.assignInstructor(course, instructor);
     }
 
