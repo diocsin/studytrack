@@ -12,9 +12,9 @@ public class Instructor {
 
     private final String name;
 
-    private List<Course> courses = new ArrayList<>();
+    private String courses;
 
-    public Instructor(String id, String name, List<Course> courses) {
+    public Instructor(String id, String name, String courses) {
         this.id = id;
         this.name = name;
         this.courses = courses;
