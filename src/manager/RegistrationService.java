@@ -7,6 +7,10 @@ import model.Course;
 import model.Student;
 
 public class RegistrationService {
+    private static RegistrationService instance;
+
+    private RegistrationService() {
+    }
 
     public void registerStudentToCourse(Student student, Course course) throws DuplicateStudentException,
             CourseFullException, ScheduleConflictException {
@@ -21,9 +25,15 @@ public class RegistrationService {
                 throw new ScheduleConflictException("Ошибка: конфликт расписания у студента: " + student.getName() + " с курсом " + course.getTitle());
             }
         }
-
         course.enrollStudent(student);
         student.enroll(course);
+    }
+
+    public static RegistrationService getInstance(){
+        if(instance == null){
+            instance = new RegistrationService();
+        }
+        return instance;
     }
 
 
