@@ -144,7 +144,7 @@ public class ConsoleMenu {
         }
 
         if(instructor == null) {
-            instructor = new Instructor(id, name, "courses");
+            instructor = new Instructor(id, name);
         }
 
         studyManager.assignInstructor(course, instructor);
@@ -240,7 +240,6 @@ public class ConsoleMenu {
 
         for (Student student : students) {
             System.out.println("Студент: " + student.getName());
-
             Map<Course, Grade> grades = student.getGrades();
 
             for (Map.Entry<Course, Grade> entry : grades.entrySet()) {
@@ -254,7 +253,6 @@ public class ConsoleMenu {
 
         for (Instructor instructor : instructors) {
             System.out.println("Преподаватель: " + instructor.getName());
-
             List<Course> courses = instructor.getCourses();
 
             for (Course c : courses) {
